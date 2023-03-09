@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: backend
+    container_name: backend
+    working_dir: /code
+    command: pipenv run uvicorn src.app:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - "./backend:/code/"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRES_USER=playpup
+      - POSTGRES_PASSWORD=playpup
+      - POSTGRES_DB=playpup
+    networks:
+      - local
+
+  postgres:
+    container_name: postgres
+    hostname: postgres
+    image: postgres:15.2-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=playpup
+      - POSTGRES_PASSWORD=playpup
+      - POSTGRES_DB=playpup
+    networks:
+      - local
+
+
+networks:
+  local:
+    name: local
+
+volumes:
+  postgres_data:
+
