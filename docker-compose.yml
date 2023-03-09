@@ -30,6 +30,7 @@ services:
       - POSTGRES_USER=playpup
       - POSTGRES_PASSWORD=playpup
       - POSTGRES_DB=playpup
+      - DB_HOST=postgres
     networks:
       - local
 
