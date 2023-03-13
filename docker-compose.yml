@@ -33,7 +33,20 @@ services:
       - DB_HOST=postgres
     networks:
       - local
-
+  
+  frontend:
+    build:
+      context: frontend
+    container_name: frontend
+    working_dir: /code
+    command: npm start
+    volumes:
+      - ./frontend:/code
+      - ./frontend/node_modules
+    ports:
+      - '3000:3000'
+    networks:
+      - local
 
 networks:
   local:
