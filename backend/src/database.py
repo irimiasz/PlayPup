@@ -19,6 +19,6 @@ SessionLocal = async_sessionmaker(engine, expire_on_commit=False)
 Base = declarative_base()
 
 
-def get_session() -> AsyncGenerator[AsyncSession, None]:
-    with SessionLocal() as session:
+async def get_session() -> AsyncGenerator[AsyncSession, None]:
+    async with SessionLocal() as session:
         yield session
