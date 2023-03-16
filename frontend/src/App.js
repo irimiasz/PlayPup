@@ -1,10 +1,31 @@
+import RootComponent from "./components/RootComponent";
+import Home from "./pages/Home";
+import Register from "./pages/Register";
+import {
+  createBrowserRouter,
+  RouterProvider
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootComponent />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
+    ],
+  },
+]);
+
 function App() {
   return (
-    <div>
-      <div>
-        <h1>Pets Pets Pets</h1>
-      </div>
-    </div>
+    <RouterProvider router={router} />
   );
 }
 
